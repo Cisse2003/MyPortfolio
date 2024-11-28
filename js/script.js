@@ -1,24 +1,25 @@
 /* MENU MOBILE */
 
 function menuMobile() {
-const btn = document.querySelector('.burger');
-const header = document.querySelector('.header');
+    const btn = document.querySelector('.burger'); // Sélectionne le bouton burger
+    const header = document.querySelector('nav'); // Sélectionne le menu
 
-btn.addEventListener('click', () => {
-    header.classList.toggle('show-nav');
-});
-
-const links = document.querySelectorAll('.navbar a');
-links.forEach(link => {
-    link.addEventListener('click', () => {
-        header.classList.remove('show-nav');
-        header.classList.add('hide-nav');
-        setTimeout(() => {
-            header.classList.remove('hide-nav');
-        }, 500); // Correspond à la durée de transition définie en CSS (0.5s)
+    // Lorsqu'on clique sur le burger, on ajoute/enlève la classe show-nav
+    btn.addEventListener('click', () => {
+        header.classList.toggle('show-nav'); // Ajoute ou enlève la classe show-nav pour faire apparaître ou disparaître le menu
     });
-});
+
+    // Si un lien est cliqué, on ferme le menu
+    const links = document.querySelectorAll('.navbar a');
+    links.forEach(link => {
+        link.addEventListener('click', () => {
+            header.classList.remove('show-nav'); // Ferme le menu
+        });
+    });
 }
+
+menuMobile();
+
 menuMobile();
 
 /* EFFET */

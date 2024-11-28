@@ -164,6 +164,13 @@
         position: relative;
         transition: color 0.3s ease-in-out;
     }
+    .navbar a {
+        display: block;
+        font-size: 2rem;
+        padding: 1rem;
+        transition: all 0.4s;
+        text-align: center;
+    }
 
     nav a::before{
         content: '';
@@ -194,17 +201,20 @@
     }
 
     .burger .bar{
-        width: 27px;
+        position: relative;
+        display: block;
+        width: 30px;
         height: 4px;
         background-color: #540FE8;
-        display: block;
+        transition: all 0.3s ease-out;
     }
 
     .burger .bar::before, .burger .bar::after{
+        content: '';
         display: block;
-        content: "";
-        width: 27px;
+        width: 30px;
         height: 4px;
+        transition: all 0.3s ease-out;
         background-color: #540FE8;
         position:absolute;
     }
@@ -937,17 +947,19 @@
         nav {
             display: flex;
             position: fixed;
-            overflow: hidden;
-            opacity: 0;
-            right: 110%;
+            top: 0;
             left: 0;
+            right: 0;
             background: #F5F5F5;
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            transition: all .3s ease-out;
-            transform: translateY(-10%);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            height: 100vh; /* Le menu occupe toute la hauteur de l'écran */
+            opacity: 0;
+            transform: translateX(100%); /* Hors de l'écran à droite au départ */
+            transition: all 0.3s ease-out; /* Transition pour le dépliage */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            z-index: 2; /* Le menu doit être au-dessus du contenu */
         }
 
         header .menu {
@@ -984,10 +996,12 @@
     
         .show-nav .burger .bar::before{
             transform: rotate(-45deg);
+            top: 0;
         }
     
         .show-nav .burger .bar::after{
             transform: rotate(45deg);
+            bottom: 0;
         }
 
         .hero{
@@ -1174,3 +1188,82 @@
     }  
 
 
+/* Reset styles */
+.resetStyle {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Navbar container */
+.navbar {
+    display: flex;
+    gap: 20px;
+}
+
+.burger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.burger .bar {
+    width: 25px;
+    height: 3px;
+    background-color: #333;
+    transition: 0.3s;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+    .navbar {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: #fff;
+        width: 100%;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+    }
+
+    .navbar.active {
+        display: flex;
+    }
+
+    .burger {
+        display: flex;
+    }
+}
+
+nav a {
+    display: block;
+    padding: 1rem;
+    font-size: 1.2rem; /* Ou la taille de votre choix */
+    transition: all 0.3s ease; /* Pour animer l'apparition de la barre */
+    position: relative; /* Permet de positionner la barre sous l'élément */
+  }
+  
+  nav a:hover {
+    color: #540FE8; /* Optionnel : change la couleur du texte au survol */
+  }
+  
+  nav a::after {
+    content: ''; /* Nécessaire pour créer la barre */
+    position: absolute;
+    bottom: 0; /* Place la barre en bas de l'élément */
+    left: 0;
+    width: 100%;
+    height: 3px; /* Taille de la barre */
+    background-color: #540FE8; /* Couleur de la barre */
+    transform: scaleX(0); /* La barre est cachée par défaut */
+    transition: transform 0.3s ease; /* Animation de la barre */
+  }
+  
+  nav a:hover::after {
+    transform: scaleX(1); /* La barre devient visible au survol */
+  }
